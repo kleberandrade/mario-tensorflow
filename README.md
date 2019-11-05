@@ -22,12 +22,13 @@ As a prerequisite it is necessary to install [Python 3.8.0](https://www.python.o
 
 ```dos
 python -m pip install --upgrade pip
-pip install pynput
-pip install opencv-python
-pip install Pillow==2.2.2
-pip install pyscreenshot
-pip install numpy
-pip install PyAutoGUI
+python -m pip install pynput
+python -m pip install opencv-python
+python -m pip install Pillow==2.2.2
+python -m pip install pyscreenshot
+python -m pip install numpy
+python -m pip install PyAutoGUI
+python -m pip install mss
 ```
 
 Import libraries in yout project
@@ -41,6 +42,7 @@ import cv2
 import pyscreenshot as ImageGrab
 import numpy
 import pyautogui
+from mss import mss
 ```
 
 ## Methods
@@ -91,14 +93,30 @@ time.sleep(0.2)
 pyautogui.mouseUp()
 ```
 
-### Step 2.1: Screen capture
+### Step 2.1: Screen capture 
+
+### Step 2.1.1 Simple screen capture
 
 Example screenshot of game and applying filters
 
 ```python
-size = get_screen_dimension()
-image = ImageGrab.grab(size)
-image = numpy.array(image)
+dimension = get_screen_dimension()
+image = numpy.array(ImageGrab.grab(dimension))
+```
+
+### Step 2.1.2: Fast screen capture (Optimized)
+
+An ultra fast cross-platform multiple screenshots module in pure python using ctypes.
+
+```python
+# change output function 'get_screen_dimension'
+dimension = {"top": x, "left": y, "width": w, "height": h}
+image = numpy.array(sct.grab(dimension))
+```
+
+### Step 2.1.3 Apply Filters
+
+```python
 image = cv2.resize(image, (0,0), fx = 0.25, fy = 0.25, interpolation=cv2.INTER_CUBIC)
 image = cv2.Canny(image, threshold1 = 100, threshold2 = 200)
 ```
@@ -113,7 +131,7 @@ The figures below show: original screen capture, resize and Canny filter
 
 ### Step 2.2: Detect Text of the HUD
 
-Text ...
+Text...
 
 ### Step 3: Simulate the keyboard
 
@@ -165,6 +183,7 @@ Text ...
 ## Experiments and Results
 
 -   **Test 1**: Random keys (keyboard input) - https://youtu.be/-JA13GCZLVQ
+-   **Test 2**: Environment observation (log) - 
 
 ## References
 
