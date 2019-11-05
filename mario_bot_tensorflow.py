@@ -8,7 +8,6 @@ import numpy
 import pyautogui
 
 keyboard = Controller()
-mouse = pynput.mouse.Controller()
 
 keys = [
     Key.up,                                 # UP
@@ -45,7 +44,7 @@ def get_screen_dimension(select_screen=True):
     return (x + 8, y + 52, x+w - 8, y+h - 10)
 
 
-def capture_screen(screen_dimension, debug=False):
+def capture_screen(screen_dimension):
     screen = numpy.array(ImageGrab.grab(screen_dimension))
     image = process_image(screen)
     return image
@@ -62,6 +61,13 @@ def action():
     time.sleep(0.2)
     keyboard.release(keys[index])
 
+def process_image_debug():
+    size = get_screen_dimension()
+    image = ImageGrab.grab(size)
+    image = numpy.array(image)
+    image = cv2.resize(image, (0,0), fx = 0.25, fy = 0.25, interpolation=cv2.INTER_CUBIC)
+    image = cv2.Canny(image, threshold1 = 100, threshold2 = 200)
+
 def main():
     screen_dimension = get_screen_dimension()
     print('Screen ', screen_dimension)
@@ -75,4 +81,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    process_image_debug()

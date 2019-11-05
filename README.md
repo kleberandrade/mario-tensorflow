@@ -64,7 +64,23 @@ pyautogui.mouseUp()
 
 ### Screen capture
 
-Text ...
+Example screenshot of game and applying filters
+
+```python
+size = get_screen_dimension()
+image = ImageGrab.grab(size)
+image = numpy.array(image)
+image = cv2.resize(image, (0,0), fx = 0.25, fy = 0.25, interpolation=cv2.INTER_CUBIC)
+image = cv2.Canny(image, threshold1 = 100, threshold2 = 200)
+```
+
+The figures below show: original screen capture, resize and Canny filter
+
+<p align="center">
+  <img height="240" src="images/image_original.png">
+  <img height="240" src="images/image_before_filter.png">
+  <img height="240" src="images/image_after_filter.png">
+</p>
 
 ### Game input
 
@@ -74,7 +90,7 @@ Default play keys set in emulator
   <img height="320" src="images/mario_inputs.png">
 </p>
 
-key mapping in code
+Key mapping in code
 
 ```python
 keys = [
@@ -120,6 +136,10 @@ Text ...
 ## References
 
 -   [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+
+## Acknowledgment
+
+-   Yuri Costa (alumnus) for recommending using the snes9x emulator
 
 ## Licença
 
