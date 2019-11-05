@@ -18,7 +18,18 @@ Text ...
 
 ### Python libraries
 
-Text ...
+As a prerequisite it is necessary to install [Python 3.8.0](https://www.python.org/downloads/) and the following libraries: . `pynput`, `opencv-python`, `pyscreenshot`, `numpy`, `pyautogui`
+
+```dos
+python -m pip install --upgrade pip
+pip install pynput
+pip install opencv-python
+pip install pyscreenshot
+pip install numpy
+pip install PyAutoGUI
+```
+
+
 
 ## Methods
 
@@ -82,7 +93,7 @@ The figures below show: original screen capture, resize and Canny filter
   <img height="240" src="images/image_after_filter.png">
 </p>
 
-### Game input
+### Simulate the keyboard
 
 Default play keys set in emulator
 
