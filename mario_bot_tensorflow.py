@@ -6,6 +6,7 @@ import cv2
 import pyscreenshot as ImageGrab
 import numpy
 import pyautogui
+from mss import mss
 
 keyboard = Controller()
 
@@ -24,9 +25,6 @@ keys = [
     Key.shift_r,                            # SELECT
 ]
 
-def log(text):
-    print('[%s] %s' % (time.strftime('%H:%M:%S'), text))
-
 windows_name = 'Super Mario World - Snes9x 1.60'
 
 def get_screen_dimension(select_screen=True):
@@ -41,13 +39,14 @@ def get_screen_dimension(select_screen=True):
         time.sleep(0.2)
         pyautogui.mouseUp()
 
-    return (x + 8, y + 52, x+w - 8, y+h - 10)
+    #return (x + 8, y + 52, x+w - 8, y+h - 10)
+    return {"top": x + 8, "left": y + 52, "width": w - 8, "height": h - 10}
 
-
-def capture_screen(screen_dimension):
-    screen = numpy.array(ImageGrab.grab(screen_dimension))
-    image = process_image(screen)
-    return image
+def capture_screen(dimension):
+    with mss() as sct:
+        screen = numpy.array(sct.grab(dimension))
+        image = process_image(screen)
+        return image
 
 def process_image(image):
     image = cv2.resize(image, (0,0), fx = 0.4, fy = 0.4)
@@ -58,28 +57,18 @@ def action():
     index = random.randint(0, len(keys) - 3)
     print('Press ', keys[index])
     keyboard.press(keys[index])
-    time.sleep(0.2)
+    time.sleep(0.002)
     keyboard.release(keys[index])
 
-def process_image_debug():
-    size = get_screen_dimension()
-    image = ImageGrab.grab(size)
-    image = numpy.array(image)
-    image = cv2.resize(image, (0,0), fx = 0.25, fy = 0.25, interpolation=cv2.INTER_CUBIC)
-    image = cv2.Canny(image, threshold1 = 100, threshold2 = 200)
-
 def main():
-    screen_dimension = get_screen_dimension()
-    print('Screen ', screen_dimension)
+    dimension = get_screen_dimension()
+    print('Screen ', dimension)
 
     while True:
-        t1 = time.time()
-        image = capture_screen(screen_dimension)
+        last_time = time.time()
+        image = capture_screen(dimension)
         action()
-        t2 = time.time()
-        print('Elapsed: ' + str(t2 - t1))
-
+        print("fps: {}".format(1 / (time.time() - last_time)))
 
 if __name__ == '__main__':
-    #main()
-    process_image_debug()
+    main()
