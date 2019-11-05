@@ -30,17 +30,30 @@ pip install numpy
 pip install PyAutoGUI
 ```
 
+Import libraries in yout project
+
+```python
+from pynput.keyboard import Key, Controller
+import pynput
+import time
+import random
+import cv2
+import pyscreenshot as ImageGrab
+import numpy
+import pyautogui
+```
+
 ## Methods
+
+To teach Mario how to play Super Mario World, we will divide the problem into 4 steps.
 
 1. Detect emulator window space
 2. Agent's observation of the current environment 
-  2.1 Capture screen and aplly filters
-  2.2 Recognize score, life and time
 3. An action provided to the environment
 4. Amount of reward returned after previous action
 5. Back to `Step 2`
 
-### Window detection
+### Step 1: Window detection
 
 Looking for the emulator window (dimension)
 
@@ -78,7 +91,7 @@ time.sleep(0.2)
 pyautogui.mouseUp()
 ```
 
-### Screen capture
+### Step 2.1: Screen capture
 
 Example screenshot of game and applying filters
 
@@ -98,7 +111,11 @@ The figures below show: original screen capture, resize and Canny filter
   <img height="240" src="images/image_after_filter.png">
 </p>
 
-### Simulate the keyboard
+### Step 2.2: Detect Text of the HUD
+
+Text ...
+
+### Step 3: Simulate the keyboard
 
 Default play keys set in emulator
 
@@ -137,15 +154,11 @@ time.sleep(0.2)
 keyboard.release(keys[1])
 ```
 
-### Detect Text of the HUD
+### Step 4.1: Tensorflow model
 
 Text ...
 
-### Tensorflow model
-
-Text ...
-
-### Training
+### Step 4.2  : Training
 
 Text ...
 
@@ -159,7 +172,6 @@ Text ...
 -   [How to Build a Python Bot That Can Play Web Games](https://code.tutsplus.com/tutorials/how-to-build-a-python-bot-that-can-play-web-games--active-11117)
 -   [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
 -   [Using Python to build an AI to play and win SNES StreetFighter II](https://www.youtube.com/watch?v=NyNUYYI-Pdg)
-
 
 ## Acknowledgment
 
