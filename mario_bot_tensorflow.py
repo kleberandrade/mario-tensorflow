@@ -6,7 +6,7 @@ import cv2
 import pyscreenshot as ImageGrab
 import numpy
 import pyautogui
-from mss import mss
+import mss
 
 keyboard = Controller()
 
@@ -40,15 +40,16 @@ def get_screen_dimension(select_screen=True):
         pyautogui.mouseUp()
 
     #return (x + 8, y + 52, x+w - 8, y+h - 10)
-    return {"top": x + 8, "left": y + 52, "width": w - 8, "height": h - 10}
+    return {"left": x + 8, "top":  y + 52, "width": w - 16, "height": h - 62}
 
 def capture_screen(dimension):
-    with mss() as sct:
+    with mss.mss() as sct:
         screen = numpy.array(sct.grab(dimension))
         image = process_image(screen)
         return image
 
 def process_image(image):
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.resize(image, (0,0), fx = 0.4, fy = 0.4)
     image = cv2.Canny(image, threshold1 = 100, threshold2 = 200)
     return image
@@ -72,3 +73,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    

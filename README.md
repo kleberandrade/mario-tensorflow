@@ -42,7 +42,7 @@ import cv2
 import pyscreenshot as ImageGrab
 import numpy
 import pyautogui
-from mss import mss
+import mss
 ```
 
 ## Methods
@@ -73,9 +73,12 @@ y = wins_named[windows_name].top
 w = wins_named[windows_name].width
 h = wins_named[windows_name].height
 
-# box: x1, y1, x2, y2
-# add padding (8, 52, 8, 10)
+# box used in step 2.1.2: (x1, y1, x2, y2)
+# add padding (8, 52, -8, -10)
 dimension = (x+8, y+52, x+w-8, y+h-10)
+
+# or, used in step 2.1.2 (x, y, w, h)
+dimension =  {"left": x + 8, "top":  y + 52, "width": w - 16, "height": h - 62}
 ```
 
 Window with original values and window by padding
@@ -109,8 +112,7 @@ image = numpy.array(ImageGrab.grab(dimension))
 An ultra fast cross-platform multiple screenshots module in pure python using ctypes.
 
 ```python
-# change output function 'get_screen_dimension'
-dimension = {"top": x, "left": y, "width": w, "height": h}
+dimension = get_screen_dimension()
 image = numpy.array(sct.grab(dimension))
 ```
 
