@@ -13,7 +13,7 @@ Text ...
 *   [Super Mario World (rom)](https://romsmode.com/roms/super-nintendo/super-mario-world-404711): Super Mario World is a 1990 side-scrolling platform game developed and published by Nintendo for the Super Nintendo Entertainment System (SNES). The story follows Mario's quest to save Princess Toadstool and Dinosaur Land from the series antagonist Bowser and his minions, the Koopalings. The gameplay is similar to that of earlier Super Mario games: Players control Mario or his brother Luigi through a series of levels in which the goal is to reach the flagpole at the end. Super Mario World introduced Yoshi, a dinosaur who can eat enemies and gain abilities by eating the shells of Koopa Troopas.
 
 <p align="center">
-  <img width="460" src="images/emulator_rom.png">
+  <img height="320" src="images/emulator_rom.png">
 </p>
 
 ### Python libraries
@@ -24,6 +24,44 @@ Text ...
 
 Text ...
 
+### Window detection
+
+Looking for the emulator window (dimension)
+
+```python
+# detect window name
+# print(pyautogui.getAllTitles())
+windows_name = 'Super Mario World - Snes9x 1.60'
+
+# mapping {title : PID}
+wins_named = dict(zip(pyautogui.getAllTitles(), pyautogui.getAllWindows()))
+
+# get window size
+x = wins_named[windows_name].left
+y = wins_named[windows_name].top
+w = wins_named[windows_name].width
+h = wins_named[windows_name].height
+
+# box: x1, y1, x2, y2
+# add padding (8, 52, 8, 10)
+dimension = (x+8, y+52, x+w-8, y+h-10)
+```
+
+Window with original values and window by padding
+
+<p align="center">
+  <img height="320" src="images/window_capture_original.png">
+  <img height="320" src="images/window_capture_pad.png">
+</p>
+
+Click on the window to select
+
+```python
+pyautogui.mouseDown(x + w / 2, y + h / 2)
+time.sleep(0.2)
+pyautogui.mouseUp()
+```
+
 ### Screen capture
 
 Text ...
@@ -33,15 +71,12 @@ Text ...
 Default play keys set in emulator
 
 <p align="center">
-  <img width="460" src="images/mario_inputs.png">
+  <img height="320" src="images/mario_inputs.png">
 </p>
 
 key mapping in code
 
 ```python
-from pynput.keyboard import Key, Controller
-import pynput
-
 keys = [
     Key.up,                                 # UP
     Key.down,                               # DOWN
@@ -61,10 +96,6 @@ keys = [
 Example of use key DOWN (index = 1)
 
 ```python
-# Libraries
-from pynput.keyboard import Key, Controller
-import pynput
-
 # Initialize keyboad
 keyboard = Controller()
 
@@ -88,7 +119,7 @@ Text ...
 
 ## References
 
-Text ...
+-   [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
 
 ## Licença
 
