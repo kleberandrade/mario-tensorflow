@@ -1,16 +1,16 @@
 # Teaching Mario to play Super Mario World
 
-Text ...
+This is a very simple example using tensorflow to play super maior world.
 
 ## Materials
 
-Text ...
+Emulator, game and libraries used in this project
 
 ### Emulator and Rom
 
-*   [Snes9x (emulator)](http://www.snes9x.com): Snes9x is a portable, freeware Super Nintendo Entertainment System (SNES) emulator. It basically allows you to play most games designed for the SNES and Super Famicom Nintendo game systems on your PC or Workstation; which includes some real gems that were only ever released in Japan.
+-   [Snes9x (emulator)](http://www.snes9x.com): Snes9x is a portable, freeware Super Nintendo Entertainment System (SNES) emulator. It basically allows you to play most games designed for the SNES and Super Famicom Nintendo game systems on your PC or Workstation; which includes some real gems that were only ever released in Japan.
 
-*   [Super Mario World (rom)](https://romsmode.com/roms/super-nintendo/super-mario-world-404711): Super Mario World is a 1990 side-scrolling platform game developed and published by Nintendo for the Super Nintendo Entertainment System (SNES). The story follows Mario's quest to save Princess Toadstool and Dinosaur Land from the series antagonist Bowser and his minions, the Koopalings. The gameplay is similar to that of earlier Super Mario games: Players control Mario or his brother Luigi through a series of levels in which the goal is to reach the flagpole at the end. Super Mario World introduced Yoshi, a dinosaur who can eat enemies and gain abilities by eating the shells of Koopa Troopas.
+-   [Super Mario World (rom)](https://romsmode.com/roms/super-nintendo/super-mario-world-404711): Super Mario World is a 1990 side-scrolling platform game developed and published by Nintendo for the Super Nintendo Entertainment System (SNES). The story follows Mario's quest to save Princess Toadstool and Dinosaur Land from the series antagonist Bowser and his minions, the Koopalings. The gameplay is similar to that of earlier Super Mario games: Players control Mario or his brother Luigi through a series of levels in which the goal is to reach the flagpole at the end. Super Mario World introduced Yoshi, a dinosaur who can eat enemies and gain abilities by eating the shells of Koopa Troopas.
 
 <p align="center">
   <img height="320" src="images/emulator_rom.png">
@@ -18,22 +18,27 @@ Text ...
 
 ### Python libraries
 
-As a prerequisite it is necessary to install [Python 3.8.0](https://www.python.org/downloads/) and the following libraries: . `pynput`, `opencv-python`, `pyscreenshot`, `numpy`, `pyautogui`
+As a prerequisite it is necessary to install [Python 3.8.0](https://www.python.org/downloads/) and the following libraries: . `pynput`, `opencv-python`, `pillow`, `pyscreenshot`, `numpy`, `pyautogui`
 
 ```dos
 python -m pip install --upgrade pip
 pip install pynput
 pip install opencv-python
+pip install Pillow==2.2.2
 pip install pyscreenshot
 pip install numpy
 pip install PyAutoGUI
 ```
 
-
-
 ## Methods
 
-Text ...
+1. Detect emulator window space
+2. Agent's observation of the current environment 
+  2.1 Capture screen and aplly filters
+  2.2 Recognize score, life and time
+3. An action provided to the environment
+4. Amount of reward returned after previous action
+5. Back to `Step 2`
 
 ### Window detection
 
@@ -132,6 +137,10 @@ time.sleep(0.2)
 keyboard.release(keys[1])
 ```
 
+### Detect Text of the HUD
+
+Text ...
+
 ### Tensorflow model
 
 Text ...
@@ -142,11 +151,15 @@ Text ...
 
 ## Experiments and Results
 
-*   **Test 1**: Random keys (keyboard input) - https://youtu.be/-JA13GCZLVQ
+-   **Test 1**: Random keys (keyboard input) - https://youtu.be/-JA13GCZLVQ
 
 ## References
 
+-   [How I built an AI to play Dino Run](https://medium.com/acing-ai/how-i-build-an-ai-to-play-dino-run-e37f37bdf153)
+-   [How to Build a Python Bot That Can Play Web Games](https://code.tutsplus.com/tutorials/how-to-build-a-python-bot-that-can-play-web-games--active-11117)
 -   [Playing Atari with Deep Reinforcement Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)
+-   [Using Python to build an AI to play and win SNES StreetFighter II](https://www.youtube.com/watch?v=NyNUYYI-Pdg)
+
 
 ## Acknowledgment
 
